@@ -1,0 +1,9 @@
+{
+  "name": "Dear My Univerest",
+  "version": "1.0.0",
+  "description": "여행지 추천 서비스",
+  "title": "Dear My Univerest",
+  "url": "http://localhost:4500",
+  "sampleUrl": "http://localhost:4500",
+  "order": ["공통", "주문", "작업"]
+}
