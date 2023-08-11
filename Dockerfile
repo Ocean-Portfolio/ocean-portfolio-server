@@ -6,6 +6,8 @@ COPY . /app
 
 RUN npm install --global pnpm
 
+RUN npm install apidoc -g
+
 RUN pnpm install
 
 RUN pnpm build
