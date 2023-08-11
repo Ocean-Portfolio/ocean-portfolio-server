@@ -1,8 +1,8 @@
 {
-  "name": "Dear My Univerest",
+  "name": "Ocean PortFolio",
   "version": "1.0.0",
-  "description": "여행지 추천 서비스",
-  "title": "Dear My Univerest",
+  "description": "Ocean PortFolio API 문서입니다.",
+  "title": "Ocean PortFolio",
   "url": "http://localhost:4500",
   "sampleUrl": "http://localhost:4500",
   "order": ["공통", "주문", "작업"]

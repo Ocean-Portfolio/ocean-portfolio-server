@@ -1,7 +1,9 @@
 import { Injectable } from '@nestjs/common';
+import { DatabaseService } from './database.service';
 
 @Injectable()
 export class AppService {
+  constructor(private readonly databaseService: DatabaseService) {}
   /**
    * @api {get} / getHello
    * @apiName getHello
@@ -15,9 +17,7 @@ export class AppService {
    *
    * @apiSuccessExample Success-Response:
    *     HTTP/1.1 200 OK
-   *     {
-   *       "msg": "Hello World!"
-   *     }
+   *     'Hello World!'
    *
    * @apiError NotFound 알수없는 요청
    *
@@ -27,11 +27,24 @@ export class AppService {
    *       "error": "error"
    *     }
    */
-  getHello(): {
-    msg: string;
-  } {
-    return {
-      msg: 'Hello World!',
-    };
+  async getHello(): Promise<string> {
+    console.log('check database connection');
+
+    try {
+      const connectCheck = await this.databaseService.query<string>(
+        `SELECT EXISTS (
+        SELECT FROM pg_catalog.pg_tables 
+        WHERE  schemaname != 'pg_catalog' 
+        AND    schemaname != 'information_schema'
+        AND    tablename  = 'travel_plan'
+     );`,
+        [],
+      );
+      console.log(connectCheck.rows[0]);
+    } catch (error) {
+      console.log(error);
+    }
+
+    return `Hello World!`;
   }
 }

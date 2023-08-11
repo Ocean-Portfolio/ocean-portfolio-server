@@ -40,7 +40,8 @@ export class FourSquareDataService {
           {
             headers: {
               Accept: 'application/json',
-              Authorization: process.env.FOURSQUARE_TOKEN,
+              // Authorization: process.env.FOURSQUARE_TOKEN,
+              Authorization: '',
             },
           },
         )
