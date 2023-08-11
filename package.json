@@ -6,7 +6,7 @@
   "private": true,
   "license": "MIT",
   "scripts": {
-    "build": "nest build && apidoc -i src/ -o apidocs",
+    "build": "nest build && pnpm build:apidoc",
     "build:apidoc": "apidoc -i src/ -o apidocs",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
