@@ -10,6 +10,7 @@ import { DatabaseService } from './database.service';
 import { OriginTravelData } from './module/originTravelData/originTravelData.module';
 import { TravelPlanModule } from './module/travelPlan/travelPlan.module';
 import { EventsModule } from './gateway/events.module';
+import { UserModule } from './module/user/user.module';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { EventsModule } from './gateway/events.module';
     OriginTravelData,
     TravelPlanModule,
     EventsModule,
+    UserModule,
   ],
   controllers: [AppController],
   providers: [AppService, AppResolver, DatabaseService],
