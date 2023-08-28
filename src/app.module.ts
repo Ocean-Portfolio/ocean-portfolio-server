@@ -7,13 +7,12 @@ import * as path from 'path';
 import { AppResolver } from './app.resolver';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { DatabaseService } from './database.service';
-import { OriginTravelData } from './module/originTravelData/originTravelData.module';
-import { TravelPlanModule } from './module/travelPlan/travelPlan.module';
 import { EventsModule } from './gateway/events.module';
 import { UserModule } from './module/user/user.module';
 import { SectionModule } from './module/section/section.module';
 import { SNSLinkModule } from './module/sns_link/sns_link.module';
 import { HistoryModule } from './module/history/history.module';
+import { HistoryItemModule } from './module/history_item/history_item.module';
 
 @Module({
   imports: [
@@ -30,6 +29,7 @@ import { HistoryModule } from './module/history/history.module';
     SectionModule,
     SNSLinkModule,
     HistoryModule,
+    HistoryItemModule,
   ],
   controllers: [AppController],
   providers: [AppService, AppResolver, DatabaseService],
