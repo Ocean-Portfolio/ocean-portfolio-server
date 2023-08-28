@@ -11,6 +11,7 @@ import { OriginTravelData } from './module/originTravelData/originTravelData.mod
 import { TravelPlanModule } from './module/travelPlan/travelPlan.module';
 import { EventsModule } from './gateway/events.module';
 import { UserModule } from './module/user/user.module';
+import { SectionModule } from './module/section/section.module';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { UserModule } from './module/user/user.module';
     TravelPlanModule,
     EventsModule,
     UserModule,
+    SectionModule,
   ],
   controllers: [AppController],
   providers: [AppService, AppResolver, DatabaseService],

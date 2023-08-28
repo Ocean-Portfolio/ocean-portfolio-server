@@ -1,7 +1,7 @@
 import { Field, ID, ObjectType } from '@nestjs/graphql';
 
 @ObjectType()
-export class UserTable {
+export class SectionTable {
   @Field(() => ID)
   id: number;
 
@@ -9,10 +9,7 @@ export class UserTable {
   name: string;
 
   @Field()
-  email: string;
-
-  @Field()
-  password: string;
+  visible_status: VisibleStatus;
 
   @Field()
   created_at: string;
@@ -20,6 +17,6 @@ export class UserTable {
   @Field()
   updated_at: string;
 
-  @Field({ nullable: true })
-  last_login: string;
+  @Field()
+  user_id: number;
 }

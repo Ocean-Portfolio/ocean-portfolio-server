@@ -1,0 +1,1 @@
+type VisibleStatus = 'VISIBLE' | 'NONE';
