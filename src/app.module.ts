@@ -13,6 +13,7 @@ import { EventsModule } from './gateway/events.module';
 import { UserModule } from './module/user/user.module';
 import { SectionModule } from './module/section/section.module';
 import { SNSLinkModule } from './module/sns_link/sns_link.module';
+import { HistoryModule } from './module/history/history.module';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { SNSLinkModule } from './module/sns_link/sns_link.module';
     UserModule,
     SectionModule,
     SNSLinkModule,
+    HistoryModule,
   ],
   controllers: [AppController],
   providers: [AppService, AppResolver, DatabaseService],
