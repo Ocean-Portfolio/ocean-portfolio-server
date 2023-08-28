@@ -1,6 +1,6 @@
 import { Args, Info, Query, Resolver } from '@nestjs/graphql';
 import { UserTable } from 'src/dto/user.dto';
-import { UserService } from 'src/service/user.service';
+import { UserService } from 'src/module/user/user.service';
 import { GraphQLResolveInfo } from 'graphql';
 
 @Resolver()

@@ -24,8 +24,6 @@ import { SNSLinkModule } from './module/sns_link/sns_link.module';
       driver: ApolloDriver,
       autoSchemaFile: 'schema.gql',
     }),
-    OriginTravelData,
-    TravelPlanModule,
     EventsModule,
     UserModule,
     SectionModule,

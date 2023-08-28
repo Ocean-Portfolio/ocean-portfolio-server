@@ -1,6 +1,6 @@
 import { Args, Query, Resolver } from '@nestjs/graphql';
 import { SNSLinkTable } from 'src/dto/sns_link.dto';
-import { SNSLinkService } from 'src/service/sns_link.service';
+import { SNSLinkService } from 'src/module/sns_link/sns_link.service';
 
 @Resolver(() => SNSLinkTable)
 export class SNSLinkResolver {

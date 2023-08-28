@@ -1,6 +1,6 @@
 import { Args, Query, Resolver } from '@nestjs/graphql';
 import { SectionTable } from 'src/dto/section.dto';
-import { SectionService } from 'src/service/section.service';
+import { SectionService } from 'src/module/section/section.service';
 
 @Resolver(() => SectionTable)
 export class SectionResolver {
