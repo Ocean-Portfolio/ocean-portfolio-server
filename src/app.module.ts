@@ -12,6 +12,7 @@ import { TravelPlanModule } from './module/travelPlan/travelPlan.module';
 import { EventsModule } from './gateway/events.module';
 import { UserModule } from './module/user/user.module';
 import { SectionModule } from './module/section/section.module';
+import { SNSLinkModule } from './module/sns_link/sns_link.module';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { SectionModule } from './module/section/section.module';
     EventsModule,
     UserModule,
     SectionModule,
+    SNSLinkModule,
   ],
   controllers: [AppController],
   providers: [AppService, AppResolver, DatabaseService],
