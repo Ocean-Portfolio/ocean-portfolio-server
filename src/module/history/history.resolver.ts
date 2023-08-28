@@ -12,10 +12,10 @@ export class HistoryResolver {
   }
 
   @Query(() => [HistoryTable])
-  async getHistoriesByUserId(
-    @Args('user_id') userId: number,
+  async getHistoriesByCategoryId(
+    @Args('category_id') categoryId: number,
   ): Promise<HistoryTable[]> {
-    return await this.historyService.findByUserId(userId);
+    return await this.historyService.findByCategoryId(categoryId);
   }
 
   @Query(() => [HistoryTable])

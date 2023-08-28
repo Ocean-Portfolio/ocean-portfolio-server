@@ -12,10 +12,10 @@ export class HistoryService {
     return result.rows;
   }
 
-  async findByUserId(userId: number): Promise<HistoryTable[]> {
-    const query = `SELECT * FROM histories WHERE user_id = $1`;
+  async findByCategoryId(categoryId: number): Promise<HistoryTable[]> {
+    const query = `SELECT * FROM histories WHERE category_id = $1`;
     const result = await this.databaseService.query<HistoryTable>(query, [
-      userId,
+      categoryId,
     ]);
     return result.rows;
   }

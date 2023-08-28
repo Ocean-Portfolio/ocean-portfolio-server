@@ -9,6 +9,18 @@ export class HistoryTable {
   title: string;
 
   @Field()
+  position: string;
+
+  @Field()
+  date_type: DateType;
+
+  @Field()
+  start_date: string;
+
+  @Field()
+  end_date: string;
+
+  @Field()
   visible_status: VisibleStatus;
 
   @Field()
@@ -18,5 +30,5 @@ export class HistoryTable {
   updated_at: string;
 
   @Field()
-  user_id: number;
+  category_id: number;
 }
