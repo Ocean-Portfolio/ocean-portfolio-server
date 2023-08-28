@@ -13,6 +13,7 @@ import { SectionModule } from './module/section/section.module';
 import { SNSLinkModule } from './module/sns_link/sns_link.module';
 import { HistoryModule } from './module/history/history.module';
 import { HistoryItemModule } from './module/history_item/history_item.module';
+import { CategoryModule } from './module/category/category.module';
 
 @Module({
   imports: [
@@ -30,6 +31,7 @@ import { HistoryItemModule } from './module/history_item/history_item.module';
     SNSLinkModule,
     HistoryModule,
     HistoryItemModule,
+    CategoryModule,
   ],
   controllers: [AppController],
   providers: [AppService, AppResolver, DatabaseService],
