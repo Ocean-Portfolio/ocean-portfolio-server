@@ -16,6 +16,7 @@ import { HistoryItemModule } from './module/history_item/history_item.module';
 import { CategoryModule } from './module/category/category.module';
 import { KeywordModule } from './module/keyword/keyword.module';
 import { ContactModule } from './module/contact/contact.module';
+import { CollabModule } from './module/collab/collab.module';
 
 @Module({
   imports: [
@@ -36,6 +37,7 @@ import { ContactModule } from './module/contact/contact.module';
     HistoryItemModule,
     KeywordModule,
     ContactModule,
+    CollabModule,
   ],
   controllers: [AppController],
   providers: [AppService, AppResolver, DatabaseService],
