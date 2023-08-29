@@ -14,6 +14,7 @@ import { SNSLinkModule } from './module/sns_link/sns_link.module';
 import { HistoryModule } from './module/history/history.module';
 import { HistoryItemModule } from './module/history_item/history_item.module';
 import { CategoryModule } from './module/category/category.module';
+import { KeywordModule } from './module/keyword/keyword.module';
 
 @Module({
   imports: [
@@ -28,10 +29,11 @@ import { CategoryModule } from './module/category/category.module';
     EventsModule,
     UserModule,
     SectionModule,
+    CategoryModule,
     SNSLinkModule,
     HistoryModule,
     HistoryItemModule,
-    CategoryModule,
+    KeywordModule,
   ],
   controllers: [AppController],
   providers: [AppService, AppResolver, DatabaseService],
