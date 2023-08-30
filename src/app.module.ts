@@ -20,6 +20,7 @@ import { CollabModule } from './module/collab/collab.module';
 import { StorageModule } from './module/storage/storage.module';
 import { ImageModule } from './module/image/image.module';
 import { IntroduceModule } from './module/introduce/introduce.module';
+import { SkillModule } from './module/skill/skill.module';
 
 @Module({
   imports: [
@@ -44,6 +45,7 @@ import { IntroduceModule } from './module/introduce/introduce.module';
     StorageModule,
     ImageModule,
     IntroduceModule,
+    SkillModule,
   ],
   controllers: [AppController],
   providers: [AppService, AppResolver, DatabaseService],
