@@ -1,5 +1,3 @@
-// files.controller.ts
-
 import {
   Controller,
   Get,

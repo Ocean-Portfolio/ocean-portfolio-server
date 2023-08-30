@@ -17,7 +17,8 @@ import { CategoryModule } from './module/category/category.module';
 import { KeywordModule } from './module/keyword/keyword.module';
 import { ContactModule } from './module/contact/contact.module';
 import { CollabModule } from './module/collab/collab.module';
-import { StorageModule } from './storage/storage.module';
+import { StorageModule } from './module/storage/storage.module';
+import { ImageModule } from './module/image/image.module';
 
 @Module({
   imports: [
@@ -40,6 +41,7 @@ import { StorageModule } from './storage/storage.module';
     ContactModule,
     CollabModule,
     StorageModule,
+    ImageModule,
   ],
   controllers: [AppController],
   providers: [AppService, AppResolver, DatabaseService],
