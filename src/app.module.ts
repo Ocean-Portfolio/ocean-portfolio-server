@@ -19,6 +19,7 @@ import { ContactModule } from './module/contact/contact.module';
 import { CollabModule } from './module/collab/collab.module';
 import { StorageModule } from './module/storage/storage.module';
 import { ImageModule } from './module/image/image.module';
+import { IntroduceModule } from './module/introduce/introduce.module';
 
 @Module({
   imports: [
@@ -42,6 +43,7 @@ import { ImageModule } from './module/image/image.module';
     CollabModule,
     StorageModule,
     ImageModule,
+    IntroduceModule,
   ],
   controllers: [AppController],
   providers: [AppService, AppResolver, DatabaseService],
