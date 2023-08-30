@@ -18,18 +18,37 @@ export class StorageService {
 
   async uploadFile(file: Express.Multer.File) {
     console.log(file);
-    const filename = `${format(Date.now(), 'yyyy-MM-dd')}-${file.originalname}`;
+
+    const currentDate = format(Date.now(), 'yyyy-MM-dd');
+    const filename = `${currentDate}-${file.originalname}`;
+    const preSearchFile = this.bucket.file(filename);
+    const isFileExists = await preSearchFile.exists();
+    let ifGenerationMatch: string | number = 0;
+
+    if (isFileExists[0]) {
+      const [{ generation }] = await preSearchFile.getMetadata();
+      ifGenerationMatch = generation;
+    }
+
     const options = {
       destination: filename,
-      preconditionOpts: { ifGenerationMatch: 0 },
+      preconditionOpts: { ifGenerationMatch },
     };
 
     const fileBuffer = Buffer.from(file.buffer);
-
     await this.bucket.file(filename).save(fileBuffer, options);
 
-    const publicUrl = `https://storage.googleapis.com/${this.bucket.name}/${filename}`;
+    const uploadedFile = this.bucket.file(filename);
+    const [metadata] = await uploadedFile.getMetadata();
+    const publicUrl = uploadedFile.publicUrl();
 
-    return publicUrl;
+    const result = {
+      ...metadata,
+      publicUrl,
+    };
+
+    console.log(result);
+
+    return result;
   }
 }
