@@ -22,8 +22,7 @@ export class StorageController {
   }
 
   @Get()
-  async getFileInfo() {
-    const filename = '2021-04-05_test.png';
+  async getFileInfo(filename: string) {
     const result = await this.storageService.getFileInfo(filename);
     return result;
   }
