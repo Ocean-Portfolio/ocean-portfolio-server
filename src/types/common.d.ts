@@ -4,7 +4,11 @@ export type VisibleStatus = 'VISIBLE' | 'NONE';
 
 export type DateType = 'YEAR' | 'MONTH' | 'FULL';
 
+export type EndTime = 'CURRENT' | 'NORMAL';
+
 export type HistoryMode = 'IMPACT' | 'DETAIL';
+
+export type ProjectMode = 'MAIN' | 'NORMAL';
 
 export interface FileUpload {
   filename: string;

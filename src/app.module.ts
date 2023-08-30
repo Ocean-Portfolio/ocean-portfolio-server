@@ -21,6 +21,7 @@ import { StorageModule } from './module/storage/storage.module';
 import { ImageModule } from './module/image/image.module';
 import { IntroduceModule } from './module/introduce/introduce.module';
 import { SkillModule } from './module/skill/skill.module';
+import { ProjectModule } from './module/project/project.module';
 
 @Module({
   imports: [
@@ -46,6 +47,7 @@ import { SkillModule } from './module/skill/skill.module';
     ImageModule,
     IntroduceModule,
     SkillModule,
+    ProjectModule,
   ],
   controllers: [AppController],
   providers: [AppService, AppResolver, DatabaseService],
