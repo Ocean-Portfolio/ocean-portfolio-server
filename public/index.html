@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>GraphQL Test</title>
+</head>
+<body>
+    <form id="uploadForm">
+        <input type="file" id="fileInput" name="file">
+        <button type="submit">Upload</button>
+    </form>
+
+    <script>
+        const form = document.getElementById('uploadForm');
+        const fileInput = document.getElementById('fileInput');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const file = fileInput.files[0];
+            const formData = new FormData();
+            formData.append('operations', JSON.stringify({
+                query: `
+                    mutation($file: Upload!) {
+                        uploadFile(file: $file) {
+                            url
+                        }
+                    }
+                `,
+                variables: {
+                    file: null
+                }
+            }));
+            formData.append('map', JSON.stringify({
+                '0': ['variables.file']
+            }));
+            formData.append('0', file);
+
+            const response = await fetch('http://localhost:5300/graphql', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'x-apollo-operation-name': 'uploadFile',
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
+
+            const result = await response.json();
+            console.log(result);
+        });
+    </script>
+</body>
+</html>

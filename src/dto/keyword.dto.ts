@@ -1,4 +1,5 @@
 import { Field, ID, ObjectType } from '@nestjs/graphql';
+import { VisibleStatus } from 'src/types/common';
 
 @ObjectType()
 export class KeywordTable {

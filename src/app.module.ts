@@ -17,6 +17,7 @@ import { CategoryModule } from './module/category/category.module';
 import { KeywordModule } from './module/keyword/keyword.module';
 import { ContactModule } from './module/contact/contact.module';
 import { CollabModule } from './module/collab/collab.module';
+import { StorageModule } from './storage/storage.module';
 
 @Module({
   imports: [
@@ -38,6 +39,7 @@ import { CollabModule } from './module/collab/collab.module';
     KeywordModule,
     ContactModule,
     CollabModule,
+    StorageModule,
   ],
   controllers: [AppController],
   providers: [AppService, AppResolver, DatabaseService],
