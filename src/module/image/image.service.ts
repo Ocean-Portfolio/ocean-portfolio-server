@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { DatabaseService } from 'src/database.service';
 import { StorageService } from '../storage/storage.service';
+import { ImageTable } from 'src/dto/image.dto';
 
 @Injectable()
 export class ImageService {
@@ -37,5 +38,23 @@ export class ImageService {
     } catch (error) {
       throw new Error(error.message);
     }
+  }
+
+  async findAll(): Promise<ImageTable[]> {
+    const query = `SELECT * FROM images`;
+    const result = await this.databaseService.query<ImageTable>(query, []);
+    return result.rows;
+  }
+
+  async findByName(name: string): Promise<ImageTable[]> {
+    const query = `SELECT * FROM images WHERE name = $1`;
+    const result = await this.databaseService.query<ImageTable>(query, [name]);
+    return result.rows;
+  }
+
+  async findById(id: number): Promise<ImageTable> {
+    const query = `SELECT * FROM images WHERE id = $1`;
+    const result = await this.databaseService.query<ImageTable>(query, [id]);
+    return result.rows[0];
   }
 }
