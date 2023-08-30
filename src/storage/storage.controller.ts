@@ -3,7 +3,7 @@
 import {
   Controller,
   Get,
-  Post,
+  Put,
   UploadedFile,
   UseInterceptors,
 } from '@nestjs/common';
@@ -14,7 +14,7 @@ import { StorageService } from './storage.service';
 export class StorageController {
   constructor(private readonly storageService: StorageService) {}
 
-  @Post('upload')
+  @Put()
   @UseInterceptors(FileInterceptor('file'))
   async uploadFile(@UploadedFile() file: Express.Multer.File) {
     const publicUrl = await this.storageService.uploadFile(file);
@@ -22,7 +22,9 @@ export class StorageController {
   }
 
   @Get()
-  hello() {
-    return 'Hello World!';
+  async getFileInfo() {
+    const filename = '2021-04-05_test.png';
+    const result = await this.storageService.getFileInfo(filename);
+    return result;
   }
 }

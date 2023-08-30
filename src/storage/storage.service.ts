@@ -20,15 +20,8 @@ export class StorageService {
     console.log(file);
 
     const currentDate = format(Date.now(), 'yyyy-MM-dd');
-    const filename = `${currentDate}-${file.originalname}`;
-    const preSearchFile = this.bucket.file(filename);
-    const isFileExists = await preSearchFile.exists();
-    let ifGenerationMatch: string | number = 0;
-
-    if (isFileExists[0]) {
-      const [{ generation }] = await preSearchFile.getMetadata();
-      ifGenerationMatch = generation;
-    }
+    const filename = `${currentDate}_${file.originalname}`;
+    const ifGenerationMatch = await this.getFileMatchedGeneration(filename);
 
     const options = {
       destination: filename,
@@ -38,17 +31,35 @@ export class StorageService {
     const fileBuffer = Buffer.from(file.buffer);
     await this.bucket.file(filename).save(fileBuffer, options);
 
-    const uploadedFile = this.bucket.file(filename);
-    const [metadata] = await uploadedFile.getMetadata();
-    const publicUrl = uploadedFile.publicUrl();
-
-    const result = {
-      ...metadata,
-      publicUrl,
-    };
+    const result = await this.getFileInfo(filename);
 
     console.log(result);
 
     return result;
+  }
+
+  async getFileInfo(filename: string) {
+    const file = this.bucket.file(filename);
+    const [metadata] = await file.getMetadata();
+    const publicUrl = file.publicUrl();
+
+    return {
+      ...metadata,
+      publicUrl,
+    };
+  }
+
+  async getFileMatchedGeneration(filename: string) {
+    const preSearchFile = this.bucket.file(filename);
+    const isFileExists = await preSearchFile.exists();
+
+    let generationId: string | number = 0;
+
+    if (isFileExists[0]) {
+      const [{ generation }] = await preSearchFile.getMetadata();
+      generationId = generation;
+    }
+
+    return generationId;
   }
 }
