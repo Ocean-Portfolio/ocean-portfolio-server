@@ -1,4 +1,4 @@
-import { Args, Query, Resolver } from '@nestjs/graphql';
+import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { ImageTable } from 'src/dto/image.dto';
 import { ImageService } from './image.service';
 
@@ -19,5 +19,10 @@ export class ImageResolver {
   @Query(() => ImageTable)
   async getImageById(@Args('id') id: number): Promise<ImageTable> {
     return await this.imageService.findById(id);
+  }
+
+  @Mutation(() => ImageTable)
+  async deleteImage(@Args('id') id: number): Promise<ImageTable> {
+    return await this.imageService.deleteImage(id);
   }
 }

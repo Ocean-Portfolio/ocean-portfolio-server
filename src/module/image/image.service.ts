@@ -10,6 +10,24 @@ export class ImageService {
     private readonly storageService: StorageService,
   ) {}
 
+  async findAll(): Promise<ImageTable[]> {
+    const query = `SELECT * FROM images`;
+    const result = await this.databaseService.query<ImageTable>(query, []);
+    return result.rows;
+  }
+
+  async findByName(name: string): Promise<ImageTable[]> {
+    const query = `SELECT * FROM images WHERE name = $1`;
+    const result = await this.databaseService.query<ImageTable>(query, [name]);
+    return result.rows;
+  }
+
+  async findById(id: number): Promise<ImageTable> {
+    const query = `SELECT * FROM images WHERE id = $1`;
+    const result = await this.databaseService.query<ImageTable>(query, [id]);
+    return result.rows[0];
+  }
+
   async putImage(image: Express.Multer.File, description?: string) {
     try {
       if (!image.mimetype.includes(image.mimetype)) {
@@ -40,21 +58,14 @@ export class ImageService {
     }
   }
 
-  async findAll(): Promise<ImageTable[]> {
-    const query = `SELECT * FROM images`;
-    const result = await this.databaseService.query<ImageTable>(query, []);
-    return result.rows;
-  }
+  async deleteImage(id: number) {
+    const imageRow = await this.findById(id);
 
-  async findByName(name: string): Promise<ImageTable[]> {
-    const query = `SELECT * FROM images WHERE name = $1`;
-    const result = await this.databaseService.query<ImageTable>(query, [name]);
-    return result.rows;
-  }
+    this.storageService.deleteFile(imageRow.name);
 
-  async findById(id: number): Promise<ImageTable> {
-    const query = `SELECT * FROM images WHERE id = $1`;
+    const query = `DELETE FROM images WHERE id = $1 RETURNING *`;
     const result = await this.databaseService.query<ImageTable>(query, [id]);
+
     return result.rows[0];
   }
 }

@@ -62,4 +62,11 @@ export class StorageService {
 
     return generationId;
   }
+
+  async deleteFile(filename: string) {
+    const file = this.bucket.file(filename);
+    await file.delete();
+
+    return true;
+  }
 }
