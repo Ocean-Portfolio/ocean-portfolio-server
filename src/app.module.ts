@@ -14,6 +14,12 @@ import { SNSLinkModule } from './module/sns_link/sns_link.module';
 import { HistoryModule } from './module/history/history.module';
 import { HistoryItemModule } from './module/history_item/history_item.module';
 import { CategoryModule } from './module/category/category.module';
+import { KeywordModule } from './module/keyword/keyword.module';
+import { ContactModule } from './module/contact/contact.module';
+import { CollabModule } from './module/collab/collab.module';
+import { StorageModule } from './module/storage/storage.module';
+import { ImageModule } from './module/image/image.module';
+import { IntroduceModule } from './module/introduce/introduce.module';
 
 @Module({
   imports: [
@@ -28,10 +34,16 @@ import { CategoryModule } from './module/category/category.module';
     EventsModule,
     UserModule,
     SectionModule,
+    CategoryModule,
     SNSLinkModule,
     HistoryModule,
     HistoryItemModule,
-    CategoryModule,
+    KeywordModule,
+    ContactModule,
+    CollabModule,
+    StorageModule,
+    ImageModule,
+    IntroduceModule,
   ],
   controllers: [AppController],
   providers: [AppService, AppResolver, DatabaseService],

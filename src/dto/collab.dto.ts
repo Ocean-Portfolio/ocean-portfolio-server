@@ -2,12 +2,15 @@ import { Field, ID, ObjectType } from '@nestjs/graphql';
 import { VisibleStatus } from 'src/types/common';
 
 @ObjectType()
-export class CategoryTable {
+export class CollabTable {
   @Field(() => ID)
   id: number;
 
   @Field()
-  name: string;
+  collab_text: string;
+
+  @Field()
+  notion_link: string;
 
   @Field()
   visible_status: VisibleStatus;
@@ -17,7 +20,4 @@ export class CategoryTable {
 
   @Field()
   updated_at: string;
-
-  @Field()
-  section_id: number;
 }

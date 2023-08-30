@@ -1,25 +1,16 @@
 import { Field, ID, ObjectType } from '@nestjs/graphql';
-import { DateType, VisibleStatus } from 'src/types/common';
+import { VisibleStatus } from 'src/types/common';
 
 @ObjectType()
-export class HistoryTable {
+export class KeywordTable {
   @Field(() => ID)
   id: number;
 
-  @Field()
-  title: string;
+  @Field({ nullable: true })
+  main_text: string;
 
-  @Field()
-  position: string;
-
-  @Field()
-  date_type: DateType;
-
-  @Field()
-  start_date: string;
-
-  @Field()
-  end_date: string;
+  @Field({ nullable: true })
+  description: string;
 
   @Field()
   visible_status: VisibleStatus;

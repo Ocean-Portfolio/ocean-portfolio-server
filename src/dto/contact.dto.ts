@@ -2,12 +2,15 @@ import { Field, ID, ObjectType } from '@nestjs/graphql';
 import { VisibleStatus } from 'src/types/common';
 
 @ObjectType()
-export class CategoryTable {
+export class ContactTable {
   @Field(() => ID)
   id: number;
 
   @Field()
-  name: string;
+  email: string;
+
+  @Field({ nullable: true })
+  email_description: string;
 
   @Field()
   visible_status: VisibleStatus;

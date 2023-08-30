@@ -38,3 +38,7 @@ apidocs
 .env
 .env*
 schema.gql
+
+GCP-Key.json
+
+src/assets

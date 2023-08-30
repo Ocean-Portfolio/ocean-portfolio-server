@@ -2,24 +2,15 @@ import { Field, ID, ObjectType } from '@nestjs/graphql';
 import { DateType, VisibleStatus } from 'src/types/common';
 
 @ObjectType()
-export class HistoryTable {
+export class IntroduceTable {
   @Field(() => ID)
   id: number;
 
-  @Field()
-  title: string;
+  @Field({ nullable: true })
+  slogan: string;
 
-  @Field()
-  position: string;
-
-  @Field()
-  date_type: DateType;
-
-  @Field()
-  start_date: string;
-
-  @Field()
-  end_date: string;
+  @Field({ nullable: true })
+  intro_text: string;
 
   @Field()
   visible_status: VisibleStatus;
@@ -31,5 +22,8 @@ export class HistoryTable {
   updated_at: string;
 
   @Field()
-  category_id: number;
+  section_id: number;
+
+  @Field({ nullable: true })
+  image_id: number;
 }
