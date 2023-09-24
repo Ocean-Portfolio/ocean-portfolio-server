@@ -32,7 +32,7 @@ jobs:
       - deploy-production
     if: ${{ always() }}
     steps:
-      - name: cd-notify
+      - name: discord-webhook-notify
         uses: nobrayner/discord-webhook@v1
         with:
           github-token: ${{ secrets.github_token }}
