@@ -40,11 +40,10 @@ export class AppService {
      );`,
         [],
       );
-      console.log(connectCheck.rows[0]);
+
+      return connectCheck.rows[0];
     } catch (error) {
       console.log(error);
     }
-
-    return `Hello World!`;
   }
 }

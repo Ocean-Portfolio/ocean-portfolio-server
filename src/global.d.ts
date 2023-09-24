@@ -8,5 +8,7 @@ declare namespace NodeJS {
     DB_NAME: string;
     STORAGE_PROJECT_ID: string;
     STORAGE_KEY_FILENAME: string;
+    DISCORD_WEBHOOK_URL: string;
+    NODE_ENV: 'development' | 'production';
   }
 }

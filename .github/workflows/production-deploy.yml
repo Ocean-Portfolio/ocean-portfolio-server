@@ -7,7 +7,7 @@ env:
   GHCR_TOKEN: ${{ secrets.GHCR_TOKEN }}
 
 jobs:
-  build:
+  deploy-production:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -24,3 +24,24 @@ jobs:
           github_token: '${{ secrets.PERSONAL_ACCESS_TOKEN }}'
       - name: Deploy to Koyeb
         run: koyeb service redeploy ocean-portfolio-server/ocean-portfolio-server
+
+  discord-webhook-notify:
+    name: Discord Notification
+    runs-on: ubuntu-latest
+    needs:
+      - deploy-production
+    if: ${{ always() }}
+    steps:
+      - name: cd-notify
+        uses: nobrayner/discord-webhook@v1
+        with:
+          github-token: ${{ secrets.github_token }}
+          discord-webhook: ${{ secrets.UPDATE_WEBHOOK }}
+          username: 'oceanBot'
+          avatar-url: 'https://cdn.discordapp.com/app-icons/1044621624864940163/87fe18353f90a7a4c275be945afc14e5.png?size=512'
+          title: '${{ github.workflow }} : ${{ github.event_name }}'
+          description: "🚥 상태 : {{STATUS}}\n🔍 로그 확인 : 제목을 클릭하세요\n"
+          include-details: 'false'
+          color-success: '#008d62'
+          color-failure: '#9b111e'
+          color-cancelled: '#ffd400'
