@@ -1,0 +1,27 @@
+name: Production Deploy ocean-portfolio-server to Koyeb
+on:
+  push:
+    branches:
+      - dev
+env:
+  GHCR_TOKEN: ${{ secrets.GHCR_TOKEN }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: pnpm/action-setup@v2
+        name: Install pnpm
+        with:
+          version: 7.26.3
+
+      - name: Install and configure the Koyeb CLI
+        uses: koyeb-community/install-koyeb-cli@v2
+        with:
+          api_token: "${{ secrets.KOYEB_TOKEN }}"
+          github_token: "${{ secrets.PERSONAL_ACCESS_TOKEN }}"
+      - name: Deploy to Koyeb
+        run: koyeb service redeploy ocean-portfolio-server
+        /ocean-portfolio-server
