@@ -35,7 +35,7 @@ jobs:
       - name: discord-webhook-notify
         uses: nobrayner/discord-webhook@v1
         with:
-          github-token: ${{ secrets.github_token }}
+          github-token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           discord-webhook: ${{ secrets.UPDATE_WEBHOOK }}
           username: 'oceanBot'
           avatar-url: 'https://cdn.discordapp.com/app-icons/1044621624864940163/87fe18353f90a7a4c275be945afc14e5.png?size=512'
