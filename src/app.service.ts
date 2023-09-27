@@ -28,7 +28,12 @@ export class AppService {
    *     }
    */
   async getHello(): Promise<string> {
-    console.log('check database connection');
+    let timerCount = 0;
+    console.log('check database connection', `${timerCount++}s`);
+
+    const timer = setInterval(() => {
+      console.log('check database connection', `${timerCount++}s`);
+    }, 1000);
 
     try {
       const connectCheck = await this.databaseService.query<string>(
@@ -41,8 +46,13 @@ export class AppService {
         [],
       );
 
+      clearInterval(timer);
+      console.log('database connection success', `${timerCount}s`);
+
       return connectCheck.rows[0];
     } catch (error) {
+      clearInterval(timer);
+      console.log('database connection fail', `${timerCount}s`);
       console.log(error);
     }
   }
