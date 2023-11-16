@@ -1,6 +1,5 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { WsAdapter } from '@nestjs/platform-ws';
 import * as dotenv from 'dotenv';
 import selfCheckWithDBConnection from './selfCheckWithDBConnection';
 import discordWebhookSend from './discordWebhookSend';
@@ -9,8 +8,8 @@ dotenv.config();
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  app.useWebSocketAdapter(new WsAdapter(app));
   app.setGlobalPrefix('api');
+  app.enableCors();
   // app.use(json({ limit: '50mb' }));
   // app.use(urlencoded({ extended: true, limit: '50mb' }));
 
