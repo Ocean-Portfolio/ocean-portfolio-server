@@ -1,72 +1,48 @@
-import { Bucket, Storage } from '@google-cloud/storage';
+import {
+  S3Client,
+  PutObjectCommand,
+  DeleteObjectCommand,
+} from '@aws-sdk/client-s3';
 import { Injectable } from '@nestjs/common';
 import { format } from 'date-fns';
 
 @Injectable()
 export class StorageService {
-  private storage: Storage;
-  private bucket: Bucket;
+  private client: S3Client;
+  private bucket = process.env.R2_BUCKET_NAME;
 
   constructor() {
-    this.storage = new Storage({
-      projectId: process.env.STORAGE_PROJECT_ID,
-      keyFilename: process.env.STORAGE_KEY_FILENAME,
+    this.client = new S3Client({
+      region: 'auto',
+      endpoint: `https://${process.env.S3_ACCOUNT_ID}.r2.cloudflarestorage.com`,
+      credentials: {
+        accessKeyId: process.env.S3_ACCESS_KEY_ID,
+        secretAccessKey: process.env.S3_SECRET_ACCESS_KEY,
+      },
     });
-
-    this.bucket = this.storage.bucket(process.env.STORAGE_PROJECT_ID);
   }
 
   async uploadFile(file: Express.Multer.File) {
-    console.log(file);
-
     const currentDate = format(Date.now(), 'yyyy-MM-dd');
     const filename = `${currentDate}_${file.originalname}`;
-    const ifGenerationMatch = await this.getFileMatchedGeneration(filename);
-
-    const options = {
-      destination: filename,
-      preconditionOpts: { ifGenerationMatch },
-    };
-
-    const fileBuffer = Buffer.from(file.buffer);
-    await this.bucket.file(filename).save(fileBuffer, options);
-
-    const result = await this.getFileInfo(filename);
-
-    console.log(result);
-
-    return result;
-  }
-
-  async getFileInfo(filename: string) {
-    const file = this.bucket.file(filename);
-    const [metadata] = await file.getMetadata();
-    const publicUrl = file.publicUrl();
-
-    return {
-      ...metadata,
-      publicUrl,
-    };
-  }
-
-  async getFileMatchedGeneration(filename: string) {
-    const preSearchFile = this.bucket.file(filename);
-    const isFileExists = await preSearchFile.exists();
-
-    let generationId: string | number = 0;
-
-    if (isFileExists[0]) {
-      const [{ generation }] = await preSearchFile.getMetadata();
-      generationId = generation;
-    }
-
-    return generationId;
+    const data = await this.client.send(
+      new PutObjectCommand({
+        Bucket: this.bucket,
+        Key: filename,
+        Body: file.buffer,
+      }),
+    );
+    return data;
   }
 
   async deleteFile(filename: string) {
-    const file = this.bucket.file(filename);
-    await file.delete();
+    const data = await this.client.send(
+      new DeleteObjectCommand({
+        Bucket: this.bucket,
+        Key: filename,
+      }),
+    );
 
-    return true;
+    return data;
   }
 }

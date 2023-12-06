@@ -18,10 +18,4 @@ export class StorageController {
     const publicUrl = await this.storageService.uploadFile(file);
     return publicUrl;
   }
-
-  @Get()
-  async getFileInfo(filename: string) {
-    const result = await this.storageService.getFileInfo(filename);
-    return result;
-  }
 }
