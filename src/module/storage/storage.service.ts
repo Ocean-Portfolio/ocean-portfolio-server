@@ -22,17 +22,25 @@ export class StorageService {
     });
   }
 
-  async uploadFile(file: Express.Multer.File) {
+  // directory 는 항상 ***/ 형태로 넣어야함
+  async uploadFile(file: Express.Multer.File, directory?: string) {
     const currentDate = format(Date.now(), 'yyyy-MM-dd');
     const filename = `${currentDate}_${file.originalname}`;
+    const Key = `${directory || ''}${filename}`;
+
     const data = await this.client.send(
       new PutObjectCommand({
         Bucket: this.bucket,
-        Key: filename,
+        Key: Key,
         Body: file.buffer,
       }),
     );
-    return data;
+    return {
+      ...data,
+      name: filename,
+      publicUrl: `https://${process.env.R2_PUBLIC_HOST}/${Key}`,
+      currentDate,
+    };
   }
 
   async deleteFile(filename: string) {

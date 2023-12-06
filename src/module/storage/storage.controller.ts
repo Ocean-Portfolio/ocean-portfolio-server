@@ -1,4 +1,5 @@
 import {
+  Body,
   Controller,
   Get,
   Put,
@@ -14,8 +15,17 @@ export class StorageController {
 
   @Put()
   @UseInterceptors(FileInterceptor('file'))
-  async uploadFile(@UploadedFile() file: Express.Multer.File) {
-    const publicUrl = await this.storageService.uploadFile(file);
+  async uploadFile(
+    @UploadedFile() file: Express.Multer.File,
+    @Body()
+    body: {
+      directory?: string;
+    },
+  ) {
+    const publicUrl = await this.storageService.uploadFile(
+      file,
+      body.directory,
+    );
     return publicUrl;
   }
 }
