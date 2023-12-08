@@ -21,8 +21,8 @@ export class ImageResolver {
     return await this.imageService.findById(id);
   }
 
-  @Mutation(() => ImageTable)
-  async deleteImage(@Args('id') id: number): Promise<ImageTable> {
-    return await this.imageService.deleteImage(id);
-  }
+  // @Mutation(() => ImageTable)
+  // async deleteImage(@Args('id') id: number): Promise<ImageTable> {
+  //   return await this.imageService.deleteImage(id);
+  // }
 }

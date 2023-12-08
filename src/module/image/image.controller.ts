@@ -1,4 +1,10 @@
-import { Controller, Put, UploadedFile, UseInterceptors } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Put,
+  UploadedFile,
+  UseInterceptors,
+} from '@nestjs/common';
 import { ImageService } from './image.service';
 import { FileInterceptor } from '@nestjs/platform-express';
 
@@ -10,9 +16,17 @@ export class ImageController {
   @UseInterceptors(FileInterceptor('file'))
   async putImage(
     @UploadedFile() file: Express.Multer.File,
-    description?: string,
+    @Body()
+    body: {
+      directory?: string;
+      description?: string;
+    },
   ) {
-    const result = await this.imageService.putImage(file, description);
+    const result = await this.imageService.putImage(
+      file,
+      body.directory,
+      body.description,
+    );
     return result;
   }
 }
