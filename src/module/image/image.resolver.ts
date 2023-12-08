@@ -1,4 +1,4 @@
-import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { Args, Query, Resolver } from '@nestjs/graphql';
 import { ImageTable } from 'src/dto/image.dto';
 import { ImageService } from './image.service';
 

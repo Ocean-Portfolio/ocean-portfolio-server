@@ -48,17 +48,19 @@ export class ImageService {
         [name],
       );
 
+      const originImageCreatedAt = selectResult.rows[0]?.created_at;
+
       const query = `
       INSERT INTO images (name, storage_url, description, visible_status, created_at, updated_at)
       VALUES ($1, $2, $3, $4, $5, $6) RETURNING *;
       `;
 
-      const result = await this.databaseService.query(query, [
+      const result = await this.databaseService.query<ImageTable>(query, [
         name,
         publicUrl,
         description || '',
         'VISIBLE',
-        selectResult.rows[0]?.created_at || new Date(),
+        originImageCreatedAt || new Date(),
         lastModified || new Date(),
       ]);
 
