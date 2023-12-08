@@ -68,14 +68,14 @@ export class ImageService {
     }
   }
 
-  // async deleteImage(id: number) {
-  //   const imageRow = await this.findById(id);
+  async deleteImage(id: number) {
+    const imageRow = await this.findById(id);
 
-  //   this.storageService.deleteFile(imageRow.name);
+    this.storageService.deleteFile(imageRow.name);
 
-  //   const query = `DELETE FROM images WHERE id = $1 RETURNING *`;
-  //   const result = await this.databaseService.query<ImageTable>(query, [id]);
+    const query = `DELETE FROM images WHERE id = $1 RETURNING *`;
+    const result = await this.databaseService.query<ImageTable>(query, [id]);
 
-  //   return result.rows[0];
-  // }
+    return result.rows[0];
+  }
 }

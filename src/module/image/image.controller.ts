@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Put,
   UploadedFile,
   UseInterceptors,
@@ -27,6 +28,12 @@ export class ImageController {
       body.directory,
       body.description,
     );
+    return result;
+  }
+
+  @Delete()
+  async deleteImage(@Body() body: { id: number }) {
+    const result = await this.imageService.deleteImage(body.id);
     return result;
   }
 }
