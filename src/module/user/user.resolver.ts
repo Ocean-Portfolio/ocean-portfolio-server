@@ -12,10 +12,20 @@ export class UserResolver {
     @Args('userId', { nullable: true }) userId?: string,
     @Info() info?: GraphQLResolveInfo,
   ): Promise<UserTable[]> {
-    const requestedFields = info.fieldNodes[0].selectionSet.selections.map(
-      (selection) => selection.kind === 'Field' && selection.name.value,
-    );
+    if (info && info.fieldNodes[0].selectionSet) {
+      const requestedFields = info.fieldNodes[0].selectionSet.selections.map(
+        (selection) => {
+          if (selection.kind === 'Field' && selection.name.value) {
+            return selection.name.value;
+          }
 
-    return await this.userService.getUser(userId, requestedFields);
+          return '';
+        },
+      );
+
+      return await this.userService.getUser(userId, requestedFields);
+    }
+
+    return await this.userService.getUser(userId);
   }
 }

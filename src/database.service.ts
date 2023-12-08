@@ -1,6 +1,6 @@
 // database.service.ts
 import { Injectable } from '@nestjs/common';
-import { Pool } from 'pg';
+import { Pool, QueryResultRow } from 'pg';
 
 @Injectable()
 export class DatabaseService {
@@ -16,7 +16,7 @@ export class DatabaseService {
     });
   }
 
-  query<T>(text: string, params: any[]) {
+  query<T extends QueryResultRow>(text: string, params: any[]) {
     return this.client.query<T>(text, params);
   }
 }

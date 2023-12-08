@@ -36,7 +36,7 @@ export class AppService {
     }, 1000);
 
     try {
-      const connectCheck = await this.databaseService.query<string>(
+      const connectCheck = await this.databaseService.query(
         `SELECT EXISTS (
         SELECT FROM pg_catalog.pg_tables 
         WHERE  schemaname != 'pg_catalog' 
