@@ -27,7 +27,7 @@ export class AppService {
    *       "error": "error"
    *     }
    */
-  async getHello(): Promise<string> {
+  async getHello() {
     let timerCount = 0;
     console.log('check database connection', `${timerCount++}s`);
 

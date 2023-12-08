@@ -1,9 +1,9 @@
 {
   "name": "Ocean PortFolio",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Ocean PortFolio API 문서입니다.",
   "title": "Ocean PortFolio",
-  "url": "http://localhost:4500",
-  "sampleUrl": "http://localhost:4500",
+  "url": "http://localhost:5300/api",
+  "sampleUrl": "http://localhost:5300/api",
   "order": ["공통", "주문", "작업"]
 }
