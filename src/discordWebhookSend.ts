@@ -1,14 +1,12 @@
 import { EmbedBuilder, WebhookClient } from 'discord.js';
 
 const embedContents = (content: string, description?: string) => {
-  return new EmbedBuilder().setTitle(content).setDescription(`${description}`);
+  return new EmbedBuilder()
+    .setTitle(content)
+    .setDescription(`${description || ''}`);
 };
 
-const discordWebhookSend = () => {
-  const webhookClient = new WebhookClient({
-    url: process.env.DISCORD_WEBHOOK_URL,
-  });
-
+const successMessage = (webhookClient: WebhookClient) => {
   webhookClient.send({
     username: 'oceanBot',
     avatarURL:
@@ -20,6 +18,32 @@ const discordWebhookSend = () => {
       ).setColor(0x008d62),
     ],
   });
+};
+
+const failureMessage = (webhookClient: WebhookClient) => {
+  webhookClient.send({
+    username: 'oceanBot',
+    avatarURL:
+      'https://cdn.discordapp.com/app-icons/1044621624864940163/87fe18353f90a7a4c275be945afc14e5.png?size=512',
+    embeds: [
+      embedContents(
+        `API 서버 재시작`,
+        'DB 서버 커넥션이 실패 하였습니다. API 서버 유동 IP 주소를 확인해주세요.',
+      ).setColor(0x008d62),
+    ],
+  });
+};
+
+const discordWebhookSend = (isSuccess: boolean) => {
+  const webhookClient = new WebhookClient({
+    url: process.env.DISCORD_WEBHOOK_URL,
+  });
+
+  if (isSuccess === false) {
+    failureMessage(webhookClient);
+  } else {
+    successMessage(webhookClient);
+  }
 };
 
 export default discordWebhookSend;

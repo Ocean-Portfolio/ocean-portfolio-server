@@ -16,10 +16,10 @@ async function bootstrap() {
 
   await app.listen(process.env.SERVER_PORT);
 
-  const isCheckIn = await selfCheckWithDBConnection();
+  const isSuccess = await selfCheckWithDBConnection();
 
-  if (isCheckIn === true && process.env.NODE_ENV === 'production') {
-    discordWebhookSend();
+  if (process.env.NODE_ENV === 'production') {
+    discordWebhookSend(isSuccess);
   }
 }
 

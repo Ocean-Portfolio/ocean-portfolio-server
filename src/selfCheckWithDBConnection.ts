@@ -5,7 +5,7 @@ const selfCheckWithDBConnection = async () => {
 
     if (resData.exists === true) return true;
   } catch (error) {
-    return error;
+    return false;
   }
   return false;
 };
