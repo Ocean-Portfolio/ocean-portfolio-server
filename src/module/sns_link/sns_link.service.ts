@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { DatabaseService } from 'src/database.service';
-import { SNSLinkTable } from 'src/dto/sns_link.dto';
+import { CreateSNSLink, SNSLinkTable } from 'src/dto/sns_link.dto';
 
 @Injectable()
 export class SNSLinkService {
@@ -25,6 +25,28 @@ export class SNSLinkService {
   async findById(id: number): Promise<SNSLinkTable> {
     const query = `SELECT * FROM sns_links WHERE id = $1`;
     const result = await this.databaseService.query<SNSLinkTable>(query, [id]);
+    return result.rows[0];
+  }
+
+  async createSNSLink(input: CreateSNSLink): Promise<SNSLinkTable> {
+    const query = `INSERT INTO sns_links (type, link, user_id) VALUES ($1, $2, $3) RETURNING *`;
+    const result = await this.databaseService.query<SNSLinkTable>(query, [
+      input.type,
+      input.link,
+      input.user_id,
+    ]);
+    return result.rows[0];
+  }
+
+  async updateSNSLinkById(input: SNSLinkTable): Promise<SNSLinkTable> {
+    const query = `UPDATE sns_links SET type = $1, link = $2, visible_status = $3, updated_at = $4 WHERE id = $5 RETURNING *`;
+    const result = await this.databaseService.query<SNSLinkTable>(query, [
+      input.type,
+      input.link,
+      input.visible_status,
+      new Date(),
+      input.id,
+    ]);
     return result.rows[0];
   }
 }

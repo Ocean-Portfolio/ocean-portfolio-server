@@ -24,3 +24,10 @@ export class SNSLinkTable {
   @Field()
   user_id: number;
 }
+
+@ObjectType()
+export class CreateSNSLink {
+  type: string;
+  link: string;
+  user_id: number;
+}
