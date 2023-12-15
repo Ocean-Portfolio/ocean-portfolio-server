@@ -9,10 +9,10 @@ export class UserTable {
   name: string;
 
   @Field()
-  email: string;
+  password: string;
 
   @Field()
-  password: string;
+  email: string;
 
   @Field()
   created_at: string;
@@ -22,4 +22,10 @@ export class UserTable {
 
   @Field({ nullable: true })
   last_login: string;
+
+  @Field({ nullable: true })
+  job: string;
+
+  @Field({ nullable: true })
+  image_id: number;
 }
