@@ -12,9 +12,6 @@ export class ImageTable {
   @Field()
   storage_url: string;
 
-  @Field()
-  generation_id: string;
-
   @Field({ nullable: true })
   description?: string;
 
