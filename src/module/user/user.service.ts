@@ -6,6 +6,15 @@ import { UserTable } from 'src/dto/user.dto';
 export class UserService {
   constructor(private readonly databaseService: DatabaseService) {}
 
+  async getUsers(): Promise<UserTable[]> {
+    const userList = await this.databaseService.query<UserTable>(
+      `SELECT * FROM users`,
+      [],
+    );
+
+    return userList.rows;
+  }
+
   async getUserById(userId?: string, fields?: string[]): Promise<UserTable[]> {
     const selectedFields = fields ? fields.join(', ') : '*';
 
@@ -26,13 +35,10 @@ export class UserService {
     }
   }
 
-  async getUsers(): Promise<UserTable[]> {
-    const userList = await this.databaseService.query<UserTable>(
-      `SELECT * FROM users`,
-      [],
-    );
-
-    return userList.rows;
+  async getUserByName(name: string): Promise<UserTable> {
+    const query = `SELECT * FROM users WHERE name = $1`;
+    const result = await this.databaseService.query<UserTable>(query, [name]);
+    return result.rows[0];
   }
 
   async updateUserById(input: UserTable): Promise<UserTable> {

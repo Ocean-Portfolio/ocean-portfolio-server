@@ -8,6 +8,11 @@ export class UserResolver {
   constructor(private readonly userService: UserService) {}
 
   @Query(() => [UserTable])
+  async getUsers(): Promise<UserTable[]> {
+    return await this.userService.getUsers();
+  }
+
+  @Query(() => [UserTable])
   async getUserById(
     @Args('userId', { nullable: true }) userId?: string,
     @Info() info?: GraphQLResolveInfo,
@@ -29,8 +34,8 @@ export class UserResolver {
     return await this.userService.getUserById(userId);
   }
 
-  @Query(() => [UserTable])
-  async getUsers(): Promise<UserTable[]> {
-    return await this.userService.getUsers();
+  @Query(() => UserTable)
+  async getUserByName(@Args('name') name: string): Promise<UserTable> {
+    return await this.userService.getUserByName(name);
   }
 }
