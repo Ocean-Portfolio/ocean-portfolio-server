@@ -20,4 +20,7 @@ export class SectionTable {
 
   @Field()
   user_id: number;
+
+  @Field()
+  sort_order: number;
 }
