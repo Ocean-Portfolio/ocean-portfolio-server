@@ -10,6 +10,14 @@ export type HistoryMode = 'IMPACT' | 'DETAIL';
 
 export type ProjectMode = 'MAIN' | 'NORMAL';
 
+export type SectionType =
+  | 'INTRODUCE'
+  | 'HISTORY'
+  | 'SKILL'
+  | 'KEYWORD'
+  | 'PROJECT'
+  | 'CONTACT';
+
 export interface FileUpload {
   filename: string;
   mimetype: string;

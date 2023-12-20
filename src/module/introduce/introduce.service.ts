@@ -12,12 +12,12 @@ export class IntroduceService {
     return result.rows;
   }
 
-  async findBySectionId(sectionId: number): Promise<IntroduceTable[]> {
+  async findBySectionId(sectionId: number): Promise<IntroduceTable> {
     const query = `SELECT * FROM introduces WHERE section_id = $1`;
     const result = await this.databaseService.query<IntroduceTable>(query, [
       sectionId,
     ]);
-    return result.rows;
+    return result.rows[0];
   }
 
   async findById(id: number): Promise<IntroduceTable> {

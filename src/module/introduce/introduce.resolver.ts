@@ -11,10 +11,10 @@ export class IntroduceResolver {
     return await this.introduceService.findAll();
   }
 
-  @Query(() => [IntroduceTable])
-  async getIntroducesByCategoryId(
+  @Query(() => IntroduceTable)
+  async getIntroducesBySectionId(
     @Args('section_id') sectionId: number,
-  ): Promise<IntroduceTable[]> {
+  ): Promise<IntroduceTable> {
     return await this.introduceService.findBySectionId(sectionId);
   }
 
