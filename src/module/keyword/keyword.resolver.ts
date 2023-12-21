@@ -11,10 +11,10 @@ export class KeywordResolver {
     return await this.historyService.findAll();
   }
 
-  @Query(() => [KeywordTable])
+  @Query(() => KeywordTable)
   async getKeywordsByCategoryId(
     @Args('category_id') categoryId: number,
-  ): Promise<KeywordTable[]> {
+  ): Promise<KeywordTable> {
     return await this.historyService.findByCategoryId(categoryId);
   }
 

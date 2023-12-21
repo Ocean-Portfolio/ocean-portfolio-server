@@ -12,12 +12,12 @@ export class KeywordService {
     return result.rows;
   }
 
-  async findByCategoryId(categoryId: number): Promise<KeywordTable[]> {
+  async findByCategoryId(categoryId: number): Promise<KeywordTable> {
     const query = `SELECT * FROM keywords WHERE category_id = $1`;
     const result = await this.databaseService.query<KeywordTable>(query, [
       categoryId,
     ]);
-    return result.rows;
+    return result.rows[0];
   }
 
   async findByTitle(title: string): Promise<KeywordTable[]> {
@@ -31,6 +31,19 @@ export class KeywordService {
   async findById(id: number): Promise<KeywordTable> {
     const query = `SELECT * FROM keywords WHERE id = $1`;
     const result = await this.databaseService.query<KeywordTable>(query, [id]);
+    return result.rows[0];
+  }
+
+  async updateKeywordById(input: KeywordTable): Promise<KeywordTable> {
+    const query = `UPDATE keywords SET updated_at = $1, main_text = $2, description = $3, visible_status = $4, category_id = $5 WHERE id = $6 RETURNING *`;
+    const result = await this.databaseService.query<KeywordTable>(query, [
+      new Date(),
+      input.main_text,
+      input.description,
+      input.visible_status,
+      input.category_id,
+      input.id,
+    ]);
     return result.rows[0];
   }
 }
