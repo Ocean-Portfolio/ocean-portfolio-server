@@ -23,4 +23,7 @@ export class KeywordTable {
 
   @Field()
   category_id: number;
+
+  @Field({ nullable: true })
+  image_id: number;
 }

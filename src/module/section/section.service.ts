@@ -27,4 +27,15 @@ export class SectionService {
     const result = await this.databaseService.query<SectionTable>(query, [id]);
     return result.rows[0];
   }
+  async updateSectionById(input: SectionTable): Promise<SectionTable> {
+    const query = `UPDATE sections SET updated_at = $1, name = $2, visible_status = $3, sort_order = $4 WHERE id = $5 RETURNING *`;
+    const result = await this.databaseService.query<SectionTable>(query, [
+      new Date(),
+      input.name,
+      input.visible_status,
+      input.sort_order,
+      input.id,
+    ]);
+    return result.rows[0];
+  }
 }
