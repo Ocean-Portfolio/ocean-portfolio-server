@@ -7,7 +7,7 @@ export class SectionService {
   constructor(private readonly databaseService: DatabaseService) {}
 
   async findByUserId(userId: number): Promise<SectionTable[]> {
-    const query = `SELECT * FROM sections WHERE user_id = $1`;
+    const query = `SELECT * FROM sections WHERE user_id = $1 ORDER BY sort_order`;
     const result = await this.databaseService.query<SectionTable>(query, [
       userId,
     ]);
