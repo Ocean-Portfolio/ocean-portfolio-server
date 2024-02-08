@@ -11,10 +11,17 @@ export class ContactResolver {
     return await this.contactService.findAll();
   }
 
-  @Query(() => [ContactTable])
+  @Query(() => ContactTable)
+  async getContactByCategoryId(
+    @Args('category_id') categoryId: number,
+  ): Promise<ContactTable> {
+    return await this.contactService.findByCategoryId(categoryId);
+  }
+
+  @Query(() => ContactTable)
   async getContactBySectionId(
     @Args('section_id') sectionId: number,
-  ): Promise<ContactTable[]> {
+  ): Promise<ContactTable> {
     return await this.contactService.findBySectionId(sectionId);
   }
 
