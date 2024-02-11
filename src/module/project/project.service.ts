@@ -29,13 +29,13 @@ export class ProjectService {
   }
 
   async findById(id: number): Promise<ProjectTable> {
-    const query = `SELECT * FROM projects WHERE id = $1 AND visible_status = 'VISIBLE' ORDER BY sort_order`;
+    const query = `SELECT * FROM projects WHERE id = $1 AND visible_status = 'VISIBLE'`;
     const result = await this.databaseService.query<ProjectTable>(query, [id]);
     return result.rows[0];
   }
 
   async findByMainMode(): Promise<ProjectTable> {
-    const query = `SELECT * FROM projects WHERE mode = 'MAIN' AND visible_status = 'VISIBLE' ORDER BY sort_order`;
+    const query = `SELECT * FROM projects WHERE mode = 'MAIN' AND visible_status = 'VISIBLE'`;
     const result = await this.databaseService.query<ProjectTable>(query, []);
     return result.rows[0];
   }
