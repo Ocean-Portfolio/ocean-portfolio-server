@@ -13,6 +13,9 @@ export class SectionTable {
   name: string;
 
   @Field()
+  section_type: SectionType;
+
+  @Field()
   visible_status: VisibleStatus;
 
   @Field()
@@ -23,7 +26,4 @@ export class SectionTable {
 
   @Field()
   user_id: number;
-
-  @Field()
-  section_type: SectionType;
 }
