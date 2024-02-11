@@ -7,6 +7,9 @@ export class ProjectTable {
   id: number;
 
   @Field()
+  sort_order: number;
+
+  @Field()
   mode: string;
 
   @Field()

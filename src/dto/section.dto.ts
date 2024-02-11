@@ -7,6 +7,9 @@ export class SectionTable {
   id: number;
 
   @Field()
+  sort_order: number;
+
+  @Field()
   name: string;
 
   @Field()
@@ -20,9 +23,6 @@ export class SectionTable {
 
   @Field()
   user_id: number;
-
-  @Field()
-  sort_order: number;
 
   @Field()
   section_type: SectionType;
