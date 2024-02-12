@@ -30,6 +30,9 @@ export class ProjectTable {
   @Field({ nullable: true })
   end_date: string;
 
+  @Field({ nullable: true })
+  mockup: string;
+
   @Field()
   visible_status: VisibleStatus;
 

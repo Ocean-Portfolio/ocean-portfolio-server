@@ -12,7 +12,7 @@ export class ProjectService {
     return result.rows;
   }
 
-  async findByCategoryId(sectionId: number): Promise<ProjectTable[]> {
+  async findBySectionId(sectionId: number): Promise<ProjectTable[]> {
     const query = `SELECT * FROM projects WHERE section_id = $1 AND visible_status = 'VISIBLE' ORDER BY sort_order`;
     const result = await this.databaseService.query<ProjectTable>(query, [
       sectionId,

@@ -10,6 +10,8 @@ export type HistoryMode = 'IMPACT' | 'DETAIL';
 
 export type ProjectMode = 'MAIN' | 'NORMAL';
 
+export type MockupType = 'MOBILE' | 'DESKTOP';
+
 export type SectionType =
   | 'INTRODUCE'
   | 'HISTORY'

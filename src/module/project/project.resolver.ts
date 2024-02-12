@@ -12,10 +12,10 @@ export class ProjectResolver {
   }
 
   @Query(() => [ProjectTable])
-  async getProjectsByCategoryId(
+  async getProjectsBySectionId(
     @Args('section_id') sectionId: number,
   ): Promise<ProjectTable[]> {
-    return await this.projectService.findByCategoryId(sectionId);
+    return await this.projectService.findBySectionId(sectionId);
   }
 
   @Query(() => [ProjectTable])
