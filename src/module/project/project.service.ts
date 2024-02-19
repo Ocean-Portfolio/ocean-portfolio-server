@@ -61,4 +61,28 @@ export class ProjectService {
 
     return result.rows[0];
   }
+
+  async createProject(input: ProjectTable): Promise<ProjectTable> {
+    console.log(input, 'input');
+    const query = `INSERT INTO projects (sort_order, mode, name, content, date_type, end_time, start_date, end_date, visible_status, created_at, updated_at, section_id, image_id, mockup) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING *`;
+
+    const result = await this.databaseService.query<ProjectTable>(query, [
+      input.sort_order,
+      input.mode,
+      input.name,
+      input.content,
+      input.date_type,
+      input.end_time,
+      input.start_date,
+      input.end_date,
+      input.visible_status,
+      new Date(),
+      new Date(),
+      input.section_id,
+      input.image_id,
+      input.mockup,
+    ]);
+
+    return result.rows[0];
+  }
 }

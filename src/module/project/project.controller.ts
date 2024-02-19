@@ -1,4 +1,4 @@
-import { Body, Controller, Put } from '@nestjs/common';
+import { Body, Controller, Post, Put } from '@nestjs/common';
 import { ProjectService } from './project.service';
 import { ProjectTable } from 'src/dto/project.dto';
 
@@ -9,5 +9,10 @@ export class ProjectController {
   @Put()
   async putProjectById(@Body() input: ProjectTable): Promise<ProjectTable> {
     return await this.projectService.putProjectById(input);
+  }
+
+  @Post()
+  async createProject(@Body() input: ProjectTable): Promise<ProjectTable> {
+    return await this.projectService.createProject(input);
   }
 }
