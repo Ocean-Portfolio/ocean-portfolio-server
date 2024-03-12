@@ -1,5 +1,6 @@
 import { Field, ID, ObjectType } from '@nestjs/graphql';
 import { DateType, VisibleStatus } from 'src/types/common';
+import { HistoryImpactTable } from './history_impact.dto';
 
 @ObjectType()
 export class HistoryItemTable {
@@ -26,6 +27,9 @@ export class HistoryItemTable {
 
   @Field({ nullable: true })
   end_date: string;
+
+  @Field(() => [HistoryImpactTable])
+  impacts: HistoryImpactTable[];
 
   @Field()
   visible_status: VisibleStatus;

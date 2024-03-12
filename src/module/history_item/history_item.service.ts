@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { DatabaseService } from 'src/database.service';
+import { HistoryImpactTable } from 'src/dto/history_impact.dto';
 import { HistoryItemTable } from 'src/dto/history_item.dto';
 
 @Injectable()
@@ -16,11 +17,27 @@ export class HistoryItemService {
   }
 
   async findByHistoryId(historyId: number): Promise<HistoryItemTable[]> {
-    const query = `SELECT * FROM history_items WHERE history_id = $1`;
-    const result = await this.databaseService.query<HistoryItemTable>(query, [
-      historyId,
-    ]);
-    return result.rows;
+    const historyItemQuery = `SELECT * FROM history_items WHERE history_id = $1`;
+
+    const historyItemResult =
+      await this.databaseService.query<HistoryItemTable>(historyItemQuery, [
+        historyId,
+      ]);
+
+    const historyImpactQuery = `SELECT * FROM history_impacts WHERE history_item_id = $1`;
+
+    await Promise.all(
+      historyItemResult.rows.map(async (historyItem, idx) => {
+        const result = await this.databaseService.query<HistoryImpactTable>(
+          historyImpactQuery,
+          [historyItem.id],
+        );
+        historyItemResult.rows[idx].impacts = result.rows;
+        return historyItem;
+      }),
+    );
+
+    return historyItemResult.rows;
   }
 
   async findByTitle(title: string): Promise<HistoryItemTable[]> {

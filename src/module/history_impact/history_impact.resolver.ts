@@ -12,10 +12,10 @@ export class HistoryImpactResolver {
   }
 
   @Query(() => [HistoryImpactTable])
-  async getHistoryImpactByHistoryId(
-    @Args('history_id') historyId: number,
+  async getHistoryImpactByHistoryItemId(
+    @Args('history_item_id') history_item_id: number,
   ): Promise<HistoryImpactTable[]> {
-    return await this.historyImpactService.findByHistoryItemId(historyId);
+    return await this.historyImpactService.findByHistoryItemId(history_item_id);
   }
 
   @Query(() => HistoryImpactTable)
