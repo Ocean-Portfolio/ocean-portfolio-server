@@ -1,5 +1,5 @@
 import { Field, ID, ObjectType } from '@nestjs/graphql';
-import { DateType, HistoryMode, VisibleStatus } from 'src/types/common';
+import { DateType, VisibleStatus } from 'src/types/common';
 
 @ObjectType()
 export class HistoryItemTable {

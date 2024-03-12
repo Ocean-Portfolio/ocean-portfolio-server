@@ -22,6 +22,7 @@ import { ImageModule } from './module/image/image.module';
 import { IntroduceModule } from './module/introduce/introduce.module';
 import { SkillModule } from './module/skill/skill.module';
 import { ProjectModule } from './module/project/project.module';
+import { HistoryImpactModule } from './module/history_impact/history_impact.module';
 
 @Module({
   imports: [
@@ -40,6 +41,7 @@ import { ProjectModule } from './module/project/project.module';
     SNSLinkModule,
     HistoryModule,
     HistoryItemModule,
+    HistoryImpactModule,
     KeywordModule,
     ContactModule,
     CollabModule,
