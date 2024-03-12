@@ -9,9 +9,6 @@ export class HistoryItemTable {
   @Field()
   sort_order: number;
 
-  // @Field()
-  // history_mode: HistoryMode;
-
   @Field()
   title: string;
 
@@ -20,15 +17,6 @@ export class HistoryItemTable {
 
   @Field({ nullable: true })
   content: string;
-
-  // @Field({ nullable: true })
-  // before: string;
-
-  // @Field({ nullable: true })
-  // after: string;
-
-  // @Field({ nullable: true })
-  // unit: string;
 
   @Field()
   date_type: DateType;

@@ -12,7 +12,7 @@ export class HistoryItemResolver {
   }
 
   @Query(() => [HistoryItemTable])
-  async getHistoryItemByCategoryId(
+  async getHistoryItemByHistoryId(
     @Args('history_id') historyId: number,
   ): Promise<HistoryItemTable[]> {
     return await this.historyService.findByHistoryId(historyId);
