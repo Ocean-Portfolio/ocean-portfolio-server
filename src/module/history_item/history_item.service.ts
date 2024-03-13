@@ -8,7 +8,7 @@ export class HistoryItemService {
   constructor(private readonly databaseService: DatabaseService) {}
 
   async findAll(): Promise<HistoryItemTable[]> {
-    const query = `SELECT * FROM history_items`;
+    const query = `SELECT * FROM history_items WHERE visible_status = 'VISIBLE' ORDER BY sort_order`;
     const result = await this.databaseService.query<HistoryItemTable>(
       query,
       [],
@@ -17,14 +17,14 @@ export class HistoryItemService {
   }
 
   async findByHistoryId(historyId: number): Promise<HistoryItemTable[]> {
-    const historyItemQuery = `SELECT * FROM history_items WHERE history_id = $1`;
+    const historyItemQuery = `SELECT * FROM history_items WHERE history_id = $1 AND visible_status = 'VISIBLE' ORDER BY sort_order`;
 
     const historyItemResult =
       await this.databaseService.query<HistoryItemTable>(historyItemQuery, [
         historyId,
       ]);
 
-    const historyImpactQuery = `SELECT * FROM history_impacts WHERE history_item_id = $1`;
+    const historyImpactQuery = `SELECT * FROM history_impacts WHERE history_item_id = $1 AND visible_status = 'VISIBLE' ORDER BY sort_order`;
 
     await Promise.all(
       historyItemResult.rows.map(async (historyItem, idx) => {
@@ -41,7 +41,7 @@ export class HistoryItemService {
   }
 
   async findByTitle(title: string): Promise<HistoryItemTable[]> {
-    const query = `SELECT * FROM history_items WHERE title = $1`;
+    const query = `SELECT * FROM history_items WHERE title = $1 AND visible_status = 'VISIBLE' ORDER BY sort_order`;
     const result = await this.databaseService.query<HistoryItemTable>(query, [
       title,
     ]);
@@ -49,7 +49,7 @@ export class HistoryItemService {
   }
 
   async findById(id: number): Promise<HistoryItemTable> {
-    const query = `SELECT * FROM history_items WHERE id = $1`;
+    const query = `SELECT * FROM history_items WHERE id = $1 AND visible_status = 'VISIBLE'`;
     const result = await this.databaseService.query<HistoryItemTable>(query, [
       id,
     ]);
