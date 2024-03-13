@@ -1,5 +1,5 @@
 import { Field, ID, ObjectType } from '@nestjs/graphql';
-import { DateType, VisibleStatus } from 'src/types/common';
+import { DateType, EndTime, VisibleStatus } from 'src/types/common';
 
 @ObjectType()
 export class HistoryTable {
@@ -7,13 +7,16 @@ export class HistoryTable {
   id: number;
 
   @Field()
+  sort_order: number;
+
+  @Field()
   title: string;
 
   @Field()
-  position: string;
+  date_type: DateType;
 
   @Field()
-  date_type: DateType;
+  end_time: EndTime;
 
   @Field()
   start_date: string;
